@@ -29,18 +29,26 @@ personController.get('/:dni', (req, res) => {
  * Guarda una persona
  */
 personController.post("/", async (req, res) => {
-    console.log(req);
+    console.log('request', req.body);
     const entity = new Person({
-        firstName: "",
-        lastName: ""
+        dni: req.body.dni,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
     });
-    await entity.save();
-    console.log(entity);
-    res.json({
-        success: true,
-        message: "Hello Person!",
-        result: null
-    });
+    try {
+        await entity.save();
+        res.json({
+            success: true,
+            message: "La persona ha sido registrada con éxito",
+            result: entity
+        });
+    } catch (error) {
+        res.json({
+            success: false,
+            message: "Ha ocurrido un error: " + error.message,
+            result: null
+        });
+    }    
 });
 
 /**

@@ -17,7 +17,6 @@ const person = new Schema({
     },
     birthday: {
         type: Date,
-        required: true
     },
     civilStatus: {
         type: String,
@@ -36,7 +35,13 @@ const person = new Schema({
     }
 },
 {
-    versionKey: true,
+    toJSON: {
+        virtuals: true
+    },
+    toObject: {
+        virtuals: true
+    },
+    versionKey: false,
     timestamps: true
 });
 

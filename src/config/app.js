@@ -1,7 +1,6 @@
 import express from 'express';
-import task from '../task';
-import person from '../person';
-import '../database'
+import personController from '../controller/person.controller';
+import './database'
 
 const app = express();
 app.set('port', 3000);
@@ -13,7 +12,6 @@ app.get('/', (req, res) => {
     });
 });
 
-app.use('/api/vi/task', task);
-app.use('/api/vi/person', person);
+app.use('/api/v1/person', personController);
 
 export default app;
